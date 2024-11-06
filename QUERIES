@@ -1,0 +1,285 @@
+create table:
+
+CREATE TABLE Employee (
+Emp_id varchar(255),
+Emp_name varchar(255),
+Emp_dob varchar(255),
+Emp_salary numeric,
+Emp_city varchar(255)
+);
+
+
+insert:
+
+INSERT INTO Employee (Emp_id, Emp_name,Emp_dob ,Emp_salary ,Emp_city)
+VALUES ('E_001','E_A','11-JAN-1982',20000,'Dhaka');
+
+INSERT INTO Employee (Emp_id, Emp_name,Emp_dob ,Emp_salary ,Emp_city)
+VALUES ('E_002','E_B','21-JUN-1985',50000,'Dhaka');
+
+INSERT INTO Employee (Emp_id, Emp_name,Emp_dob ,Emp_salary ,Emp_city)
+VALUES ('E_003','E_C','18-MAR-1995',40000,'Dhaka');
+
+
+alias:
+
+SELECT Emp_id AS 'Employee ID', Emp_name AS 'Employee Name', Emp_dob AS 'Date of birth', Emp_salary AS 'Employee Salary', Emp_city AS 'Employee city'
+FROM Employee;
+
+
+duplicate rmv: 
+
+SELECT DISTINCT Emp_city
+FROM Employee;
+
+
+concatenation:
+
+SELECT CONCAT (Emp_name,' has an Employee ID ',Emp_id)
+FROM employee
+WHERE Emp_id='E_001';
+
+
+
+
+
+DELETE:
+
+DELETE FROM Employee
+
+WHERE EMP_ID='E_004';
+
+
+
+CREATE TABLE teacher(
+Name  varchar(255),
+Designation varchar(255),
+Email varchar(255),
+Salary numeric
+    );
+
+
+
+
+CREATE TABLE courses(
+Code numeric,
+Section varchar(255),
+Teacher1 varchar(255),
+ Teacher2 varchar(255)
+    );
+
+for table teacher:
+
+INSERT INTO teacher (Name,Designation,Email,Salary)
+VALUES ('Rania', 'AP', 'rania@gmail.com', '40000');
+
+INSERT INTO teacher (Name,Designation,Email,Salary)
+VALUES ('Zinia', 'LEC', 'zinia@yahoo.com', '25000');
+
+INSERT INTO teacher (Name,Designation,Email,Salary)
+VALUES ('Anannya', 'LEC', 'anannya@gmail.com', '25000');
+
+INSERT INTO teacher (Name,Designation,Email,Salary)
+VALUES ('Shahriar', 'AP', 'shahriar@hotmail.com', '40000');
+
+INSERT INTO teacher (Name,Designation,Email,Salary)
+VALUES ('Mahbub', 'AP', 'mahbub@yahoo.com', '40000');
+
+INSERT INTO teacher (Name,Designation,Email,Salary)
+VALUES ('Israt', 'AssocP', 'israt@gmail.com', '60000');
+
+INSERT INTO teacher (Name,Designation,Email,Salary)
+VALUES ('Adeeb', 'Lec', 'adeeb@gmail.com', '25000');
+
+
+
+
+for table courses:
+
+INSERT INTO courses(Code,Section,Teacher1,Teacher2)
+VALUES ('3102', 'A', 'Rania', 'Zinia');
+
+INSERT INTO courses(Code,Section,Teacher1,Teacher2)
+VALUES ('3102', 'B', 'Rania', 'Zinia');
+
+INSERT INTO courses(Code,Section,Teacher1,Teacher2)
+VALUES ('3104', 'A', 'Anannya', 'Mahbub');
+
+INSERT INTO courses(Code,Section,Teacher1,Teacher2)
+VALUES ('3104', 'B', 'Anannya', 'Mahbub');
+
+INSERT INTO courses(Code,Section,Teacher1,Teacher2)
+VALUES ('3106', 'A', 'Israt', 'Adeeb');
+
+INSERT INTO courses(Code,Section,Teacher1,Teacher2)
+VALUES ('3106', 'B', 'Israt', 'Adeeb');
+
+
+
+
+RELATIONAL OPERATOR:
+
+SELECT *
+FROM teacher
+WHERE Salary >50000
+
+
+AGAIN:
+
+SELECT *
+FROM teacher
+WHERE Salary >(SELECT Salary
+               FROM teacher WHERE Name='Mahbub'
+               )
+
+
+for AND OR: 2 no ta
+
+SELECT *
+FROM teacher
+WHERE Salary >=(SELECT Salary
+               FROM teacher WHERE Name='Adeeb')
+              and Salary <=(SELECT Salary
+               FROM teacher WHERE Name='Rania');
+
+
+BETWEEN AND:
+
+1)
+
+SELECT *
+FROM teacher
+WHERE Salary BETWEEN 50000 AND 100000
+
+
+2)
+
+
+
+
+IN/ NOT IN:
+
+1)
+
+SELECT *
+FROM courses
+WHERE CODE IN (3102,3104,3106)\
+
+
+2) IF USE NOT IN:
+
+
+SELECT *
+FROM courses
+WHERE CODE NOT IN (3104,3106)
+
+
+
+order by:
+
+
+SELECT *
+FROM courses
+WHERE Code LIKE '3%'
+ORDER BY Teacher1 ASC; [alphabet asc order e ashe]
+
+insert into TABLENAME(Att1,Att2,Att3,Att4 …)
+VALUES (Value1,Value2,Value3,Value4,.......) //single insert
+
+insert into employeee(Emp_id,Emp_name,Emp_dob,Emp_salary,Emp_city)
+VALUES('E_001','E_A','1982-01-11',20000,'Dhaka'),
+('E_002','E_B','1985-06-21',50000,'Dhaka'),
+('E_003','E_C','1995-03-18',40000,'Sylhet') 
+
+//Rename Column ( temporary )
+SELECT Emp_id AS "Employee ID",Emp_name AS "Employee Name" ,Emp_dob AS "Employee Date of Birth",Emp_salary AS "Employee Salary" ,Emp_city AS "Employee City" from employeee;
+
+If we don't want to rename an attribute, then we can just denote the attribute name without any AS clause. 
+
+//Removing Duplicate Value
+SELECT DISTINCT Emp_city from employee;
+
+ //Concatenation
+SELECT CONCAT(Emp_name," has Employee ID : ",Emp_id)
+FROM employee;
+
+E_A Has Employee ID E_001
+
+//date format change
+SELECT DATE_FORMAT(Emp_dob,’%M %e,%Y’)
+from employee; 
+Small letter = 2 digits will be displayed 
+Comma or / between %M or %e will change the characters displayed between month and date 
+
+//Delete
+Delete from TABLENAME ; //all rows deleted
+Delete from TABLENAME where AttributeName = ‘Something’ //deleting single row based on condition
+
+//Relational Operations (equal not equ greater less eigula) along with Logicals 
+SELECT column_name 
+FROM table_name
+where column_name >= (______) in the blank space, we can input a single constant value, like 40000, or else any constant value returned by a sub query. 
+Basic Usage : 
+SELECT *
+FROM TEACHERS 
+WHERE SALARY >= 50000 AND Salary <= 100000
+
+
+USING SUBQUERY :
+Lets say we want to get the information of teachers who get more salary than AP Mahbub. 
+So the query would be 
+SELECT *
+FROM TEACHERS 
+WHERE SALARY > (SELECT SALARY 
+FROM TEACHERS WHERE Name =‘Mahbub’ and Designation = ‘AP’ )
+Logicals are already used here, AND OR NOT can only be used to enter specific conditions in WHERE part.
+
+Display records of teachers whose salary is Greater Equal than Adeeb and Less Equal than Rania
+SELECT *
+FROM TEACHERS 
+WHERE SALARY >= (SELECT SALARY 
+FROM TEACHERS WHERE Name ='Adeeb') AND Salary <= (SELECT SALARY 
+FROM TEACHERS WHERE Name ='Rania')
+
+Same can be achieved using between and command
+SELECT *
+FROM TEACHERS 
+WHERE SALARY Between (SELECT SALARY 
+FROM TEACHERS WHERE Name ='Adeeb') AND (SELECT SALARY 
+FROM TEACHERS WHERE Name ='Rania')
+
+The lower limit of range should be next to between and higher limit should be next to and
+ 
+Exact String or value matching ( IN / NOT IN command)
+SELECT *
+FROM courses 
+Where Code in ('3102','3104') // ei code wala record dekhabe
+
+SELECT *
+FROM courses 
+Where Code not in ('3102','3104') // ei code bade record dekhabe
+
+Substring Matching (LIKE / NOT LIKE )
+Used for partial substring/value matching : %
+Allows exactly one characters : _  (Underscore)
+
+SELECT * 
+FROM Courses 
+Where Name Like %ai% 
+This query means any name with the substring ai will be displayed : Raiyan , 
+If %a%i is written, then any name with both a and i, with the order a first and i second will be written. 
+I.e : Sami 
+If %i%a is written, then any name with both a and i, with the order a first and i second will be written. 
+I.e : Riya
+
+
+
+
+
+
+
+
+
+
+
+

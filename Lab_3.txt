@@ -1,0 +1,82 @@
+insert into customer1 values
+('2252421055','kochy','2004-07-04','mirpur','dhaka'),
+('2252421052','ko','2004-07-09','dohs','dhaka'),
+('2252421058','chy','2004-07-08','mirpur','dhaka'),
+('2252421059','ochy','2004-06-04','dohs','dhaka'),
+('2252421056','koch','2003-07-04','mirpur','dhaka');
+
+
+create table customer1
+( cust_id varchar(20)not null,
+  cust_name varchar(20),
+  cust_dob date,
+  cust_strret varchar(20),
+  cust_city varchar(20)default 'dhaka'
+
+
+);
+
+MySQL -h localhost -u root
+create database demodb;
+use demodb;
+exit;
+show databases;
+
+
+alter table customer1 add cust_address varchar(20);
+
+select* from customer1;
+
+alter table customer1 change cust_address  cust_add varchar(20);
+
+alter table customer1 modify cust_dob varchar(20);
+
+alter table customer1
+drop column cust_add;
+
+create table account
+( account_id varchar(20)not null,
+  balance numeric(5,2),
+  account_type varchar(20)
+);
+insert into account values
+('2252421',500.00,'janina'),
+('2252422',600.00,'janina'),
+('2252423',460.00,'janina'),
+('2252424',345.55,'janina'),
+('2252425',67.77,'janina');
+
+
+create table depositor
+( cust_id varchar(20)not null,
+ account_id varchar(20)not null
+
+);
+
+insert into depositor values
+('2252421055','2252421'),
+('2252421052','2252422'),
+('2252421058','2252423'),
+('2252421059','2252424'),
+('2252421056','2252425');
+
+select* from account;
+select* from depositor;
+
+cartesian product/cross join:
+select cust_name,account_id
+from customer1, depositor;
+
+equijoin:
+select cust_name,account_id
+from customer1, depositor
+where customer1.cust_name=depositor.account_id;
+
+table alias:
+select cust_name,account_id
+from customer1 C, depositor D
+where C.cust_name=D.account_id;
+
+
+
+

@@ -1,0 +1,102 @@
+Lab-3
+
+create table hospital1
+( hos_id varchar(20)not null,
+  hos_name varchar(20),
+  hos_city varchar(20)default 'dhaka'
+  primary key(hos_id)
+
+);
+
+create table doctor
+( doc_id varchar(20)not null,
+  doc_name varchar(20),
+  special varchar(20),
+  hos_id varchar(20),
+  primary key(doc_id)
+
+);
+
+
+create table patient
+( patient_id varchar(20)not null,
+  patient_name varchar(20),
+  age numeric(3,0),
+  doc_id varchar(20),
+  hos_id varchar(20),
+
+  primary key(patient_id)
+
+);
+
+insert into hospital1 values
+('101','popular','dhaka'),
+('102','dmc','dhaka'),
+('103','mmc','mymansingh'),
+('104','dmc','dhaka'),
+('105','cmc','chittgong'),
+('106','medihome','dhaka');
+
+
+
+insert into doctor values
+('1','manny','cardiologist','101'),
+('2','claire','orthologist','103'),
+('3','trisha','cardiologist','104'),
+('4','nishi','orthologist','105'),
+('5','rima','dermatologist','104'),
+('6','shetu','dermatologist','103');
+
+
+
+insert into patient values
+('10','Karim',9,'3','101'),
+('11','rahim',10,'6','103'),
+('12','probir',32,'3','104'),
+('13','halima',27,'1','105'),
+('14','subha',25,'6','104'),
+('15','zuairia',23,'4','103');
+
+UPDATE patient
+SET  hos_id= '104', 
+where patient_id='10';
+
+
+find all patients and their assigned doctors:
+
+SELECT d.doc_name,d.doc_id,p.patient_name
+FROM doctor as d,patient as p
+WHERE d.doc_id=p.doc_id;
+
+ retrieve the names treating patients younger than 18
+
+select h.hos_name
+from hospital1 as h, patient as p
+where h.hos_id=p.hos_id and p.age>18;
+
+
+find the average age of patients for each doctor
+select d.doc_name,avg(age)
+from doctor as d, patient as p
+where d.doc_id=p.doc_id
+group by d.doc_name;
+
+
+find all patients and their doctors hospitals located in city=dhaka
+
+select p.patient_name,d.doc_name
+
+from doctor as d, patient as p
+where p.doc_id=d.doc_id and p.hos_id in (select hos_id
+from hospital1
+where hos_city='dhaka');
+
+
+
+find all patints whose ages are between 25 and 40
+
+select p.patient_name
+from patient as p
+where age between 25 and 40;
+
+

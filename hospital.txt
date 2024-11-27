@@ -1,0 +1,63 @@
+create table hospital(
+hospitalID varchar(5) ,
+hospital_name varchar(15),
+city varchar(15),
+primary key(hospitalID)
+);
+
+create table doctor(
+doctorID varchar(6),
+doctor_name varchar(15),
+specialization varchar(15),
+hospitalID varchar(5),
+primary key(doctorID)
+);
+ create table patient
+(
+patientID varchar(6),
+patient_name varchar(15),
+age numeric(3,0),
+doctorID varchar(6),
+hospitalID varchar(5) ,
+primary key(patientID)
+
+);
+
+insert into hospital
+values('12340','medihome','dhaka'),
+('12341','medicare','ctg'),
+('12342','popular','ctg'),
+('12343','dmc','dhaka'),
+('12344','smc','dhaka'),
+('12345','cmc','dhaka');
+
+insert into doctor
+values('12301','robana','Psychiatry','12340'),
+('12302','nurul','Orthopedics','12342'),
+('12303','zakia','Cardiology','12345'),
+('12304','jesmin','Psychiatry','12340'),
+('12305','mahdi','Cardiology','12345'),
+('12306','zuairia','Dermatology','12344');
+
+insert into patient
+values('1231','kochy',13,'12301','12340'),
+('1232','spondon',30,'12302','12342'),
+('1233','meghla',9,'12301','12340'),
+('1234','nibir',100,'12306','12344'),
+('1235','galib',40,'12303','12345'),
+('1236','diba',27,'12303','12345');
+
+2. select patientID,patient_name,doctorID,doctor_name
+from patient join doctor using(doctorID);
+4.SELECT all doctor.doctorID, avg(age) 
+FROM patient,doctor
+ WHERE doctor.doctorID=patient.doctorID
+group by patient.doctorID;
+5.SELECT doctor_name, patient_name 
+FROM patient,doctor,hospital
+ WHERE doctor.doctorID=patient.doctorID AND
+ patient.hospitalID=hospital.hospitalID AND
+ city='dhaka';
+6.SELECT  patient_name 
+FROM patient
+ WHERE age between 25 and 40;

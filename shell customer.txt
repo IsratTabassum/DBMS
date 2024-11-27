@@ -1,0 +1,63 @@
+create table customer
+(cust_id varchar(12) not null,
+cust_name varchar(20),
+cust_dob date,
+cust_street varchar(12),
+cust_city varchar(12) default 'dhaka'
+);
+
+insert into customer
+values('1234501','zuairia','2003-07-11','mirpur','dhaka'),
+('1234502','raida','2005-01-06','mirpur','dhaka'),
+('1234503','robana','2003-02-21','bonani','dhaka'),
+('1234504','nurul','2004-05-13','mirpur','dhaka'),
+('1234505','musab','2021-10-18','mirpur','dhaka')
+
+;
+
+alter table customer add cust_address varchar(20);
+ select* from customer;
+
+rename:
+alter table customer
+change  cust_address  cust_addr varchar(20);
+ 
+alter table customer
+modify cust_dob varchar(20);
+
+alter table customer
+drop column cust_addr;
+
+
+create table account
+(acc_id varchar(12) not null,
+balance numeric (10,2),
+acc_type varchar(12)
+);
+
+insert into account
+values('12301',2345.23,'savings'),
+('12302',23325.23,'savings'),
+('12303',23445.21,'savings'),
+('12304',21145.71,'savings'),
+('12305',234.91,'savings')
+;
+
+create table depositor
+(
+cust_id varchar(12) ,
+acc_id varchar(12)
+);
+
+insert into depositor
+values('1234501','12301'),
+('1234502','12302'),
+('1234503','12303'),
+('1234504','12304'),
+('1234505','12305');
+
+
+curtesian/cross:
+select cust_name,acc_id from customer,depositor;
+
+select cust_name,acc_id from customer cross join depositor;
